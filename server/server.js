@@ -5,10 +5,12 @@ const cors = require('cors');
 const db = require('./util/db-config');
 const routes = require('./util/routes');
 
-const corsOptions = {origin: `http://localhost:${port}`};
+const port = 3001;
+
+const corsOptions = {origin: `http://localhost:3000`};
 
 const app = express();
-const port = 3000;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors(corsOptions));
@@ -28,9 +30,11 @@ db.mongoose
 
 app.get('/', routes.home);
 app.post('/add', routes.add);
+app.get('/article', routes.findTitle);
 app.get('/findOne/:id', routes.findOne);
 app.put('/update/:id', routes.update);
 app.delete('/delete/:id', routes.delete);
+app.delete('/', routes.deleteAll);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);

@@ -61,6 +61,22 @@ exports.findOne = (req, res) => {
       });
 };
 
+exports.findTitle = (req, res) => {
+  const title = req.query.title;
+  const condition = title ? {title: {$regex: new RegExp(title), $options: 'i'}} : {};
+
+  Articles.find(condition)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+          err.message || 'Some error occurred while retrieving articles.',
+        });
+      });
+};
+
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -103,6 +119,21 @@ exports.delete = (req, res) => {
       .catch((err) => {
         res.status(500).send({
           message: 'Could not delete Article with id=' + id,
+        });
+      });
+};
+
+exports.deleteAll = (req, res) => {
+  Articles.deleteMany({})
+      .then((data) => {
+        res.send({
+          message: `${data.deletedCount} Tutorials were deleted successfully!`,
+        });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+          err.message || 'Some error occurred while removing all tutorials.',
         });
       });
 };
