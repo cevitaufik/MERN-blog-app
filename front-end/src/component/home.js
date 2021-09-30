@@ -1,6 +1,8 @@
 import React from 'react';
 import ArticleDataService from '../service/article-service';
-import {Link} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+
+import Article from './article';
 
 export default class ArticleList extends React.Component {
   constructor(props) {
@@ -88,32 +90,33 @@ export default class ArticleList extends React.Component {
     const {searchTitle, articles, currentArticle, currentIndex} = this.state;
 
     return (
-      <div className="list row">
-        <div className="col-md-8">
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by title"
-              value={searchTitle}
-              onChange={this.onChangeSearchTitle}
-            />
-            <div className="input-group-append">
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={this.searchTitle}
-              >
+      <div className="list row container-md">
+        <Router>
+          <div className="col-md-8">
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search by title"
+                value={searchTitle}
+                onChange={this.onChangeSearchTitle}
+              />
+              <div className="input-group-append">
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={this.searchTitle}
+                >
                 Search
-              </button>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-6">
-          <h4>Articles List</h4>
+          <div className="col-md-6">
+            <h4>Articles List</h4>
 
-          <ul className="list-group">
-            {articles &&
+            <ul className="list-group">
+              {articles &&
               articles.map((article, index) => (
                 <li
                   className={
@@ -126,17 +129,17 @@ export default class ArticleList extends React.Component {
                   {article.title}
                 </li>
               ))}
-          </ul>
+            </ul>
 
-          <button
-            className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllArticles}
-          >
+            <button
+              className="m-3 btn btn-sm btn-danger"
+              onClick={this.removeAllArticles}
+            >
             Remove All
-          </button>
-        </div>
-        <div className="col-md-6">
-          {currentArticle ? (
+            </button>
+          </div>
+          <div className="col-md-6">
+            {currentArticle ? (
             <div>
               <h4>Article</h4>
               <div>
@@ -151,12 +154,11 @@ export default class ArticleList extends React.Component {
                 </label>{' '}
                 {currentArticle.article}
               </div>
-
               <Link
                 to={'/update/' + currentArticle.id}
                 className="btn btn-warning"
               >
-                Edit
+                  Edit
               </Link>
             </div>
           ) : (
@@ -165,7 +167,11 @@ export default class ArticleList extends React.Component {
               <p>Please click on an Article...</p>
             </div>
           )}
-        </div>
+          </div>
+          <Switch>
+            <Route exact path='/update/:id' component={Article}></Route>
+          </Switch>
+        </Router>
       </div>
     );
   }

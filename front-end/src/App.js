@@ -35,11 +35,6 @@ class App extends React.Component {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to='/article' class="nav-link">
-                      Article
-                    </Link>
-                  </li>
-                  <li className="nav-item">
                     <Link to='/add' class="nav-link">
                       Add
                     </Link>
@@ -56,9 +51,9 @@ class App extends React.Component {
           <div>
             <Switch>
               <Route exact path='/' component={Home}></Route>
-              <Route exact path='/article/:id' component={Article}></Route>
               <Route exact path='/add' component={Add}></Route>
               <Route exact path='/about' component={About}></Route>
+              <Route exact path='/update/:id' component={Article}></Route>
             </Switch>
           </div>
         </Router>

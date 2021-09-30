@@ -31,7 +31,7 @@ db.mongoose
 app.get('/', routes.home);
 app.post('/add', routes.add);
 app.get('/article', routes.findTitle);
-app.get('/findOne/:id', routes.findOne);
+app.get('/update/:id', routes.findOne);
 app.put('/update/:id', routes.update);
 app.delete('/delete/:id', routes.delete);
 app.delete('/', routes.deleteAll);

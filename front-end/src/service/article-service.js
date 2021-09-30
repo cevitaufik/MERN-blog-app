@@ -13,6 +13,10 @@ class ArticleDataService {
     return http.post('/add', data);
   }
 
+  get(id) {
+    return http.get(`/update/${id}`);
+  }
+
   update(id, data) {
     return http.put(`/update/${id}`, data);
   }

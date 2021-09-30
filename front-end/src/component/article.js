@@ -21,6 +21,7 @@ export default class Article extends React.Component {
   }
 
   componentDidMount() {
+    // eslint-disable-next-line react/prop-types
     this.getAricle(this.props.match.params.id);
   }
 
@@ -93,7 +94,7 @@ export default class Article extends React.Component {
     const {currentArticle} = this.state;
 
     return (
-      <div>
+      <div className="container-md">
         {currentArticle ? (
           <div className="edit-form">
             <h4>Article</h4>
